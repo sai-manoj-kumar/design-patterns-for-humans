@@ -3,7 +3,7 @@
   <img src="./.github/banner.svg" height="150px" />
 </p>
 
-***
+---
 
 <p align="center">
 🎉 Ultra-simplified explanation to design patterns! 🎉
@@ -12,29 +12,28 @@
 A topic that can easily make anyone's mind wobble. Here I try to make them stick in to your<br> mind (and maybe mine) by explaining them in the <i>simplest</i> way possible.
 </p>
 
-***
+---
 
 <sub>Check out my [other project](http://roadmap.sh) and say "hi" on [Twitter](https://twitter.com/kamrify).</sub>
 
 <br>
 
-|[Creational Design Patterns](#creational-design-patterns)|[Structural Design Patterns](#structural-design-patterns)|[Behavioral Design Patterns](#behavioral-design-patterns)|
-|:-|:-|:-|
-|[Simple Factory](#-simple-factory)|[Adapter](#-adapter)|[Chain of Responsibility](#-chain-of-responsibility)|
-|[Factory Method](#-factory-method)|[Bridge](#-bridge)|[Command](#-command)|
-|[Abstract Factory](#-abstract-factory)|[Composite](#-composite)|[Iterator](#-iterator)|
-|[Builder](#-builder)|[Decorator](#-decorator)|[Mediator](#-mediator)|
-|[Prototype](#-prototype)|[Facade](#-facade)|[Memento](#-memento)|
-|[Singleton](#-singleton)|[Flyweight](#-flyweight)|[Observer](#-observer)|
-||[Proxy](#-proxy)|[Visitor](#-visitor)|
-|||[Strategy](#-strategy)|
-|||[State](#-state)|
-|||[Template Method](#-template-method)|
+| [Creational Design Patterns](#creational-design-patterns) | [Structural Design Patterns](#structural-design-patterns) | [Behavioral Design Patterns](#behavioral-design-patterns) |
+| :-------------------------------------------------------- | :-------------------------------------------------------- | :-------------------------------------------------------- |
+| [Simple Factory](#-simple-factory)                        | [Adapter](#-adapter)                                      | [Chain of Responsibility](#-chain-of-responsibility)      |
+| [Factory Method](#-factory-method)                        | [Bridge](#-bridge)                                        | [Command](#-command)                                      |
+| [Abstract Factory](#-abstract-factory)                    | [Composite](#-composite)                                  | [Iterator](#-iterator)                                    |
+| [Builder](#-builder)                                      | [Decorator](#-decorator)                                  | [Mediator](#-mediator)                                    |
+| [Prototype](#-prototype)                                  | [Facade](#-facade)                                        | [Memento](#-memento)                                      |
+| [Singleton](#-singleton)                                  | [Flyweight](#-flyweight)                                  | [Observer](#-observer)                                    |
+|                                                           | [Proxy](#-proxy)                                          | [Visitor](#-visitor)                                      |
+|                                                           |                                                           | [Strategy](#-strategy)                                    |
+|                                                           |                                                           | [State](#-state)                                          |
+|                                                           |                                                           | [Template Method](#-template-method)                      |
 
 <br>
 
-Introduction
-=================
+# Introduction
 
 Design patterns are solutions to recurring problems; **guidelines on how to tackle certain problems**. They are not classes, packages or libraries that you can plug into your application and wait for the magic to happen. These are, rather, guidelines on how to tackle certain problems in certain situations.
 
@@ -44,53 +43,57 @@ Wikipedia describes them as
 
 > In software engineering, a software design pattern is a general reusable solution to a commonly occurring problem within a given context in software design. It is not a finished design that can be transformed directly into source or machine code. It is a description or template for how to solve a problem that can be used in many different situations.
 
-⚠️ Be Careful
------------------
+## ⚠️ Be Careful
+
 - Design patterns are not a silver bullet to all your problems.
-- Do not try to force them; bad things are supposed to happen, if done so. 
+- Do not try to force them; bad things are supposed to happen, if done so.
 - Keep in mind that design patterns are solutions **to** problems, not solutions **finding** problems; so don't overthink.
 - If used in a correct place in a correct manner, they can prove to be a savior; or else they can result in a horrible mess of a code.
 
-> Also note that the code samples below are in PHP-7, however this shouldn't stop you because the concepts are same anyways.
+> Also note that the code samples below are in java-7, however this shouldn't stop you because the concepts are same anyways.
 
-Types of Design Patterns
------------------
+## Types of Design Patterns
 
-* [Creational](#creational-design-patterns)
-* [Structural](#structural-design-patterns)
-* [Behavioral](#behavioral-design-patterns)
+- [Creational](#creational-design-patterns)
+- [Structural](#structural-design-patterns)
+- [Behavioral](#behavioral-design-patterns)
 
-Creational Design Patterns
-==========================
+# Creational Design Patterns
 
 In plain words
+
 > Creational patterns are focused towards how to instantiate an object or group of related objects.
 
 Wikipedia says
+
 > In software engineering, creational design patterns are design patterns that deal with object creation mechanisms, trying to create objects in a manner suitable to the situation. The basic form of object creation could result in design problems or added complexity to the design. Creational design patterns solve this problem by somehow controlling this object creation.
 
- * [Simple Factory](#-simple-factory)
- * [Factory Method](#-factory-method)
- * [Abstract Factory](#-abstract-factory)
- * [Builder](#-builder)
- * [Prototype](#-prototype)
- * [Singleton](#-singleton)
+- [Simple Factory](#-simple-factory)
+- [Factory Method](#-factory-method)
+- [Abstract Factory](#-abstract-factory)
+- [Builder](#-builder)
+- [Prototype](#-prototype)
+- [Singleton](#-singleton)
 
-🏠 Simple Factory
---------------
+## 🏠 Simple Factory
+
 Real world example
+
 > Consider, you are building a house and you need doors. You can either put on your carpenter clothes, bring some wood, glue, nails and all the tools required to build the door and start building it in your house or you can simply call the factory and get the built door delivered to you so that you don't need to learn anything about the door making or to deal with the mess that comes with making it.
 
 In plain words
+
 > Simple factory simply generates an instance for client without exposing any instantiation logic to the client
 
 Wikipedia says
+
 > In object-oriented programming (OOP), a factory is an object for creating other objects – formally a factory is a function or method that returns objects of a varying prototype or class from some method call, which is assumed to be "new".
 
 **Programmatic Example**
 
 First of all we have a door interface and the implementation
-```php
+
+```java
 interface Door
 {
     public function getWidth(): float;
@@ -119,8 +122,10 @@ class WoodenDoor implements Door
     }
 }
 ```
+
 Then we have our door factory that makes the door and returns it
-```php
+
+```java
 class DoorFactory
 {
     public static function makeDoor($width, $height): Door
@@ -129,8 +134,10 @@ class DoorFactory
     }
 }
 ```
+
 And then it can be used as
-```php
+
+```java
 // Make me a door of 100x200
 $door = DoorFactory::makeDoor(100, 200);
 
@@ -145,23 +152,25 @@ $door2 = DoorFactory::makeDoor(50, 100);
 
 When creating an object is not just a few assignments and involves some logic, it makes sense to put it in a dedicated factory instead of repeating the same code everywhere.
 
-🏭 Factory Method
---------------
+## 🏭 Factory Method
 
 Real world example
+
 > Consider the case of a hiring manager. It is impossible for one person to interview for each of the positions. Based on the job opening, she has to decide and delegate the interview steps to different people.
 
 In plain words
+
 > It provides a way to delegate the instantiation logic to child classes.
 
 Wikipedia says
+
 > In class-based programming, the factory method pattern is a creational pattern that uses factory methods to deal with the problem of creating objects without having to specify the exact class of the object that will be created. This is done by creating objects by calling a factory method—either specified in an interface and implemented by child classes, or implemented in a base class and optionally overridden by derived classes—rather than by calling a constructor.
 
- **Programmatic Example**
+**Programmatic Example**
 
 Taking our hiring manager example above. First of all we have an interviewer interface and some implementations for it
 
-```php
+```java
 interface Interviewer
 {
     public function askQuestions();
@@ -186,7 +195,7 @@ class CommunityExecutive implements Interviewer
 
 Now let us create our `HiringManager`
 
-```php
+```java
 abstract class HiringManager
 {
 
@@ -201,8 +210,10 @@ abstract class HiringManager
 }
 
 ```
+
 Now any child can extend it and provide the required interviewer
-```php
+
+```java
 class DevelopmentManager extends HiringManager
 {
     protected function makeInterviewer(): Interviewer
@@ -219,9 +230,10 @@ class MarketingManager extends HiringManager
     }
 }
 ```
+
 and then it can be used as
 
-```php
+```java
 $devManager = new DevelopmentManager();
 $devManager->takeInterview(); // Output: Asking about design patterns
 
@@ -233,23 +245,25 @@ $marketingManager->takeInterview(); // Output: Asking about community building.
 
 Useful when there is some generic processing in a class but the required sub-class is dynamically decided at runtime. Or putting it in other words, when the client doesn't know what exact sub-class it might need.
 
-🔨 Abstract Factory
-----------------
+## 🔨 Abstract Factory
 
 Real world example
+
 > Extending our door example from Simple Factory. Based on your needs you might get a wooden door from a wooden door shop, iron door from an iron shop or a PVC door from the relevant shop. Plus you might need a guy with different kind of specialities to fit the door, for example a carpenter for wooden door, welder for iron door etc. As you can see there is a dependency between the doors now, wooden door needs carpenter, iron door needs a welder etc.
 
 In plain words
+
 > A factory of factories; a factory that groups the individual but related/dependent factories together without specifying their concrete classes.
 
 Wikipedia says
+
 > The abstract factory pattern provides a way to encapsulate a group of individual factories that have a common theme without specifying their concrete classes
 
 **Programmatic Example**
 
 Translating the door example above. First of all we have our `Door` interface and some implementation for it
 
-```php
+```java
 interface Door
 {
     public function getDescription();
@@ -271,9 +285,10 @@ class IronDoor implements Door
     }
 }
 ```
+
 Then we have some fitting experts for each door type
 
-```php
+```java
 interface DoorFittingExpert
 {
     public function getDescription();
@@ -297,7 +312,8 @@ class Carpenter implements DoorFittingExpert
 ```
 
 Now we have our abstract factory that would let us make family of related objects i.e. wooden door factory would create a wooden door and wooden door fitting expert and iron door factory would create an iron door and iron door fitting expert
-```php
+
+```java
 interface DoorFactory
 {
     public function makeDoor(): Door;
@@ -332,8 +348,10 @@ class IronDoorFactory implements DoorFactory
     }
 }
 ```
+
 And then it can be used as
-```php
+
+```java
 $woodenFactory = new WoodenDoorFactory();
 
 $door = $woodenFactory->makeDoor();
@@ -352,26 +370,29 @@ $door->getDescription();  // Output: I am an iron door
 $expert->getDescription(); // Output: I can only fit iron doors
 ```
 
-As you can see the wooden door factory has encapsulated the `carpenter` and the `wooden door` also iron door factory has encapsulated the `iron door` and `welder`. And thus it had helped us make sure that for each of the created door, we do not get a wrong fitting expert.   
+As you can see the wooden door factory has encapsulated the `carpenter` and the `wooden door` also iron door factory has encapsulated the `iron door` and `welder`. And thus it had helped us make sure that for each of the created door, we do not get a wrong fitting expert.
 
 **When to use?**
 
 When there are interrelated dependencies with not-that-simple creation logic involved
 
-👷 Builder
---------------------------------------------
+## 👷 Builder
+
 Real world example
-> Imagine you are at Hardee's and you order a specific deal, lets say, "Big Hardee" and they hand it over to you without *any questions*; this is the example of simple factory. But there are cases when the creation logic might involve more steps. For example you want a customized Subway deal, you have several options in how your burger is made e.g what bread do you want? what types of sauces would you like? What cheese would you want? etc. In such cases builder pattern comes to the rescue.
+
+> Imagine you are at Hardee's and you order a specific deal, lets say, "Big Hardee" and they hand it over to you without _any questions_; this is the example of simple factory. But there are cases when the creation logic might involve more steps. For example you want a customized Subway deal, you have several options in how your burger is made e.g what bread do you want? what types of sauces would you like? What cheese would you want? etc. In such cases builder pattern comes to the rescue.
 
 In plain words
+
 > Allows you to create different flavors of an object while avoiding constructor pollution. Useful when there could be several flavors of an object. Or when there are a lot of steps involved in creation of an object.
 
 Wikipedia says
+
 > The builder pattern is an object creation software design pattern with the intentions of finding a solution to the telescoping constructor anti-pattern.
 
 Having said that let me add a bit about what telescoping constructor anti-pattern is. At one point or the other we have all seen a constructor like below:
 
-```php
+```java
 public function __construct($size, $cheese = true, $pepperoni = true, $tomato = false, $lettuce = true)
 {
 }
@@ -383,7 +404,7 @@ As you can see; the number of constructor parameters can quickly get out of hand
 
 The sane alternative is to use the builder pattern. First of all we have our burger that we want to make
 
-```php
+```java
 class Burger
 {
     protected $size;
@@ -406,7 +427,7 @@ class Burger
 
 And then we have the builder
 
-```php
+```java
 class BurgerBuilder
 {
     public $size;
@@ -451,9 +472,10 @@ class BurgerBuilder
     }
 }
 ```
+
 And then it can be used as:
 
-```php
+```java
 $burger = (new BurgerBuilder(14))
                     ->addPepperoni()
                     ->addLettuce()
@@ -465,24 +487,27 @@ $burger = (new BurgerBuilder(14))
 
 When there could be several flavors of an object and to avoid the constructor telescoping. The key difference from the factory pattern is that; factory pattern is to be used when the creation is a one step process while builder pattern is to be used when the creation is a multi step process.
 
-🐑 Prototype
-------------
+## 🐑 Prototype
+
 Real world example
+
 > Remember dolly? The sheep that was cloned! Lets not get into the details but the key point here is that it is all about cloning
 
 In plain words
+
 > Create object based on an existing object through cloning.
 
 Wikipedia says
+
 > The prototype pattern is a creational design pattern in software development. It is used when the type of objects to create is determined by a prototypical instance, which is cloned to produce new objects.
 
 In short, it allows you to create a copy of an existing object and modify it to your needs, instead of going through the trouble of creating an object from scratch and setting it up.
 
 **Programmatic Example**
 
-In PHP, it can be easily done using `clone`
+In java, it can be easily done using `clone`
 
-```php
+```java
 class Sheep
 {
     protected $name;
@@ -515,8 +540,10 @@ class Sheep
     }
 }
 ```
+
 Then it can be cloned like below
-```php
+
+```java
 $original = new Sheep('Jolly');
 echo $original->getName(); // Jolly
 echo $original->getCategory(); // Mountain Sheep
@@ -534,15 +561,18 @@ Also you could use the magic method `__clone` to modify the cloning behavior.
 
 When an object is required that is similar to existing object or when the creation would be expensive as compared to cloning.
 
-💍 Singleton
-------------
+## 💍 Singleton
+
 Real world example
+
 > There can only be one president of a country at a time. The same president has to be brought to action, whenever duty calls. President here is singleton.
 
 In plain words
+
 > Ensures that only one object of a particular class is ever created.
 
 Wikipedia says
+
 > In software engineering, the singleton pattern is a software design pattern that restricts the instantiation of a class to one object. This is useful when exactly one object is needed to coordinate actions across the system.
 
 Singleton pattern is actually considered an anti-pattern and overuse of it should be avoided. It is not necessarily bad and could have some valid use-cases but should be used with caution because it introduces a global state in your application and change to it in one place could affect in the other areas and it could become pretty difficult to debug. The other bad thing about them is it makes your code tightly coupled plus mocking the singleton could be difficult.
@@ -550,71 +580,62 @@ Singleton pattern is actually considered an anti-pattern and overuse of it shoul
 **Programmatic Example**
 
 To create a singleton, make the constructor private, disable cloning, disable extension and create a static variable to house the instance
-```php
-final class President
-{
-    private static $instance;
 
-    private function __construct()
-    {
-        // Hide the constructor
-    }
+```java
+final class President {
+    private static President instance;
 
-    public static function getInstance(): President
-    {
-        if (!self::$instance) {
-            self::$instance = new self();
+    private President() {}
+
+    public static President getInstance() {
+        if (instance == null) {
+            instance = new President();
         }
-
-        return self::$instance;
-    }
-
-    private function __clone()
-    {
-        // Disable cloning
-    }
-
-    private function __wakeup()
-    {
-        // Disable unserialize
+        return instance;
     }
 }
 ```
-Then in order to use
-```php
-$president1 = President::getInstance();
-$president2 = President::getInstance();
 
-var_dump($president1 === $president2); // true
+Then in order to use
+
+```java
+President president1 = President.getInstance();
+President president2 = President.getInstance();
+System.out.println(president1 == president2); // true
 ```
 
-Structural Design Patterns
-==========================
+# Structural Design Patterns
+
 In plain words
+
 > Structural patterns are mostly concerned with object composition or in other words how the entities can use each other. Or yet another explanation would be, they help in answering "How to build a software component?"
 
 Wikipedia says
+
 > In software engineering, structural design patterns are design patterns that ease the design by identifying a simple way to realize relationships between entities.
 
- * [Adapter](#-adapter)
- * [Bridge](#-bridge)
- * [Composite](#-composite)
- * [Decorator](#-decorator)
- * [Facade](#-facade)
- * [Flyweight](#-flyweight)
- * [Proxy](#-proxy)
+- [Adapter](#-adapter)
+- [Bridge](#-bridge)
+- [Composite](#-composite)
+- [Decorator](#-decorator)
+- [Facade](#-facade)
+- [Flyweight](#-flyweight)
+- [Proxy](#-proxy)
 
-🔌 Adapter
--------
+## 🔌 Adapter
+
 Real world example
+
 > Consider that you have some pictures in your memory card and you need to transfer them to your computer. In order to transfer them you need some kind of adapter that is compatible with your computer ports so that you can attach memory card to your computer. In this case card reader is an adapter.
 > Another example would be the famous power adapter; a three legged plug can't be connected to a two pronged outlet, it needs to use a power adapter that makes it compatible with the two pronged outlet.
 > Yet another example would be a translator translating words spoken by one person to another
 
 In plain words
+
 > Adapter pattern lets you wrap an otherwise incompatible object in an adapter to make it compatible with another class.
 
 Wikipedia says
+
 > In software engineering, the adapter pattern is a software design pattern that allows the interface of an existing class to be used as another interface. It is often used to make existing classes work with others without modifying their source code.
 
 **Programmatic Example**
@@ -623,7 +644,7 @@ Consider a game where there is a hunter and he hunts lions.
 
 First we have an interface `Lion` that all types of lions have to implement
 
-```php
+```java
 interface Lion
 {
     public function roar();
@@ -643,8 +664,10 @@ class AsianLion implements Lion
     }
 }
 ```
+
 And hunter expects any implementation of `Lion` interface to hunt.
-```php
+
+```java
 class Hunter
 {
     public function hunt(Lion $lion)
@@ -656,7 +679,7 @@ class Hunter
 
 Now let's say we have to add a `WildDog` in our game so that hunter can hunt that also. But we can't do that directly because dog has a different interface. To make it compatible for our hunter, we will have to create an adapter that is compatible
 
-```php
+```java
 // This needs to be added to the game
 class WildDog
 {
@@ -681,9 +704,10 @@ class WildDogAdapter implements Lion
     }
 }
 ```
+
 And now the `WildDog` can be used in our game using `WildDogAdapter`.
 
-```php
+```java
 $wildDog = new WildDog();
 $wildDogAdapter = new WildDogAdapter($wildDog);
 
@@ -691,24 +715,27 @@ $hunter = new Hunter();
 $hunter->hunt($wildDogAdapter);
 ```
 
-🚡 Bridge
-------
+## 🚡 Bridge
+
 Real world example
+
 > Consider you have a website with different pages and you are supposed to allow the user to change the theme. What would you do? Create multiple copies of each of the pages for each of the themes or would you just create separate theme and load them based on the user's preferences? Bridge pattern allows you to do the second i.e.
 
 ![With and without the bridge pattern](https://cloud.githubusercontent.com/assets/11269635/23065293/33b7aea0-f515-11e6-983f-98823c9845ee.png)
 
 In Plain Words
+
 > Bridge pattern is about preferring composition over inheritance. Implementation details are pushed from a hierarchy to another object with a separate hierarchy.
 
 Wikipedia says
+
 > The bridge pattern is a design pattern used in software engineering that is meant to "decouple an abstraction from its implementation so that the two can vary independently"
 
 **Programmatic Example**
 
 Translating our WebPage example from above. Here we have the `WebPage` hierarchy
 
-```php
+```java
 interface WebPage
 {
     public function __construct(Theme $theme);
@@ -745,8 +772,10 @@ class Careers implements WebPage
     }
 }
 ```
+
 And the separate theme hierarchy
-```php
+
+```java
 
 interface Theme
 {
@@ -775,8 +804,10 @@ class AquaTheme implements Theme
     }
 }
 ```
+
 And both the hierarchies
-```php
+
+```java
 $darkTheme = new DarkTheme();
 
 $about = new About($darkTheme);
@@ -786,23 +817,25 @@ echo $about->getContent(); // "About page in Dark Black";
 echo $careers->getContent(); // "Careers page in Dark Black";
 ```
 
-🌿 Composite
------------------
+## 🌿 Composite
 
 Real world example
+
 > Every organization is composed of employees. Each of the employees has the same features i.e. has a salary, has some responsibilities, may or may not report to someone, may or may not have some subordinates etc.
 
 In plain words
+
 > Composite pattern lets clients treat the individual objects in a uniform manner.
 
 Wikipedia says
+
 > In software engineering, the composite pattern is a partitioning design pattern. The composite pattern describes that a group of objects is to be treated in the same way as a single instance of an object. The intent of a composite is to "compose" objects into tree structures to represent part-whole hierarchies. Implementing the composite pattern lets clients treat individual objects and compositions uniformly.
 
 **Programmatic Example**
 
 Taking our employees example from above. Here we have different employee types
 
-```php
+```java
 interface Employee
 {
     public function __construct(string $name, float $salary);
@@ -817,7 +850,7 @@ class Developer implements Employee
     protected $salary;
     protected $name;
     protected $roles;
-    
+
     public function __construct(string $name, float $salary)
     {
         $this->name = $name;
@@ -881,7 +914,7 @@ class Designer implements Employee
 
 Then we have an organization which consists of several different types of employees
 
-```php
+```java
 class Organization
 {
     protected $employees;
@@ -906,7 +939,7 @@ class Organization
 
 And then it can be used as
 
-```php
+```java
 // Prepare the employees
 $john = new Developer('John Doe', 12000);
 $jane = new Designer('Jane Doe', 15000);
@@ -919,24 +952,25 @@ $organization->addEmployee($jane);
 echo "Net salaries: " . $organization->getNetSalaries(); // Net Salaries: 27000
 ```
 
-☕ Decorator
--------------
+## ☕ Decorator
 
 Real world example
 
 > Imagine you run a car service shop offering multiple services. Now how do you calculate the bill to be charged? You pick one service and dynamically keep adding to it the prices for the provided services till you get the final cost. Here each type of service is a decorator.
 
 In plain words
+
 > Decorator pattern lets you dynamically change the behavior of an object at run time by wrapping them in an object of a decorator class.
 
 Wikipedia says
+
 > In object-oriented programming, the decorator pattern is a design pattern that allows behavior to be added to an individual object, either statically or dynamically, without affecting the behavior of other objects from the same class. The decorator pattern is often useful for adhering to the Single Responsibility Principle, as it allows functionality to be divided between classes with unique areas of concern.
 
 **Programmatic Example**
 
 Lets take coffee for example. First of all we have a simple coffee implementing the coffee interface
 
-```php
+```java
 interface Coffee
 {
     public function getCost();
@@ -956,8 +990,10 @@ class SimpleCoffee implements Coffee
     }
 }
 ```
+
 We want to make the code extensible to allow options to modify it if required. Lets make some add-ons (decorators)
-```php
+
+```java
 class MilkCoffee implements Coffee
 {
     protected $coffee;
@@ -1021,7 +1057,7 @@ class VanillaCoffee implements Coffee
 
 Lets make a coffee now
 
-```php
+```java
 $someCoffee = new SimpleCoffee();
 echo $someCoffee->getCost(); // 10
 echo $someCoffee->getDescription(); // Simple Coffee
@@ -1039,23 +1075,25 @@ echo $someCoffee->getCost(); // 20
 echo $someCoffee->getDescription(); // Simple Coffee, milk, whip, vanilla
 ```
 
-📦 Facade
-----------------
+## 📦 Facade
 
 Real world example
+
 > How do you turn on the computer? "Hit the power button" you say! That is what you believe because you are using a simple interface that computer provides on the outside, internally it has to do a lot of stuff to make it happen. This simple interface to the complex subsystem is a facade.
 
 In plain words
+
 > Facade pattern provides a simplified interface to a complex subsystem.
 
 Wikipedia says
+
 > A facade is an object that provides a simplified interface to a larger body of code, such as a class library.
 
 **Programmatic Example**
 
 Taking our computer example from above. Here we have the computer class
 
-```php
+```java
 class Computer
 {
     public function getElectricShock()
@@ -1094,8 +1132,10 @@ class Computer
     }
 }
 ```
+
 Here we have the facade
-```php
+
+```java
 class ComputerFacade
 {
     protected $computer;
@@ -1121,30 +1161,34 @@ class ComputerFacade
     }
 }
 ```
+
 Now to use the facade
-```php
+
+```java
 $computer = new ComputerFacade(new Computer());
 $computer->turnOn(); // Ouch! Beep beep! Loading.. Ready to be used!
 $computer->turnOff(); // Bup bup buzzz! Haah! Zzzzz
 ```
 
-🍃 Flyweight
----------
+## 🍃 Flyweight
 
 Real world example
+
 > Did you ever have fresh tea from some stall? They often make more than one cup that you demanded and save the rest for any other customer so to save the resources e.g. gas etc. Flyweight pattern is all about that i.e. sharing.
 
 In plain words
+
 > It is used to minimize memory usage or computational expenses by sharing as much as possible with similar objects.
 
 Wikipedia says
+
 > In computer programming, flyweight is a software design pattern. A flyweight is an object that minimizes memory use by sharing as much data as possible with other similar objects; it is a way to use objects in large numbers when a simple repeated representation would use an unacceptable amount of memory.
 
 **Programmatic example**
 
 Translating our tea example from above. First of all we have tea types and tea maker
 
-```php
+```java
 // Anything that will be cached is flyweight.
 // Types of tea here will be flyweights.
 class KarakTea
@@ -1169,7 +1213,7 @@ class TeaMaker
 
 Then we have the `TeaShop` which takes orders and serves them
 
-```php
+```java
 class TeaShop
 {
     protected $orders;
@@ -1193,9 +1237,10 @@ class TeaShop
     }
 }
 ```
+
 And it can be used as below
 
-```php
+```java
 $teaMaker = new TeaMaker();
 $shop = new TeaShop($teaMaker);
 
@@ -1209,22 +1254,25 @@ $shop->serve();
 // Serving tea to table# 5
 ```
 
-🎱 Proxy
--------------------
+## 🎱 Proxy
+
 Real world example
+
 > Have you ever used an access card to go through a door? There are multiple options to open that door i.e. it can be opened either using access card or by pressing a button that bypasses the security. The door's main functionality is to open but there is a proxy added on top of it to add some functionality. Let me better explain it using the code example below.
 
 In plain words
+
 > Using the proxy pattern, a class represents the functionality of another class.
 
 Wikipedia says
+
 > A proxy, in its most general form, is a class functioning as an interface to something else. A proxy is a wrapper or agent object that is being called by the client to access the real serving object behind the scenes. Use of the proxy can simply be forwarding to the real object, or can provide additional logic. In the proxy extra functionality can be provided, for example caching when operations on the real object are resource intensive, or checking preconditions before operations on the real object are invoked.
 
 **Programmatic Example**
 
 Taking our security door example from above. Firstly we have the door interface and an implementation of door
 
-```php
+```java
 interface Door
 {
     public function open();
@@ -1244,8 +1292,10 @@ class LabDoor implements Door
     }
 }
 ```
+
 Then we have a proxy to secure any doors that we want
-```php
+
+```java
 class SecuredDoor implements Door
 {
     protected $door;
@@ -1275,156 +1325,149 @@ class SecuredDoor implements Door
     }
 }
 ```
+
 And here is how it can be used
-```php
+
+```java
 $door = new SecuredDoor(new LabDoor());
 $door->open('invalid'); // Big no! It ain't possible.
 
 $door->open('$ecr@t'); // Opening lab door
 $door->close(); // Closing lab door
 ```
+
 Yet another example would be some sort of data-mapper implementation. For example, I recently made an ODM (Object Data Mapper) for MongoDB using this pattern where I wrote a proxy around mongo classes while utilizing the magic method `__call()`. All the method calls were proxied to the original mongo class and result retrieved was returned as it is but in case of `find` or `findOne` data was mapped to the required class objects and the object was returned instead of `Cursor`.
 
-Behavioral Design Patterns
-==========================
+# Behavioral Design Patterns
 
 In plain words
+
 > It is concerned with assignment of responsibilities between the objects. What makes them different from structural patterns is they don't just specify the structure but also outline the patterns for message passing/communication between them. Or in other words, they assist in answering "How to run a behavior in software component?"
 
 Wikipedia says
+
 > In software engineering, behavioral design patterns are design patterns that identify common communication patterns between objects and realize these patterns. By doing so, these patterns increase flexibility in carrying out this communication.
 
-* [Chain of Responsibility](#-chain-of-responsibility)
-* [Command](#-command)
-* [Iterator](#-iterator)
-* [Mediator](#-mediator)
-* [Memento](#-memento)
-* [Observer](#-observer)
-* [Visitor](#-visitor)
-* [Strategy](#-strategy)
-* [State](#-state)
-* [Template Method](#-template-method)
+- [Chain of Responsibility](#-chain-of-responsibility)
+- [Command](#-command)
+- [Iterator](#-iterator)
+- [Mediator](#-mediator)
+- [Memento](#-memento)
+- [Observer](#-observer)
+- [Visitor](#-visitor)
+- [Strategy](#-strategy)
+- [State](#-state)
+- [Template Method](#-template-method)
 
-🔗 Chain of Responsibility
------------------------
+## 🔗 Chain of Responsibility
 
 Real world example
+
 > For example, you have three payment methods (`A`, `B` and `C`) setup in your account; each having a different amount in it. `A` has 100 USD, `B` has 300 USD and `C` having 1000 USD and the preference for payments is chosen as `A` then `B` then `C`. You try to purchase something that is worth 210 USD. Using Chain of Responsibility, first of all account `A` will be checked if it can make the purchase, if yes purchase will be made and the chain will be broken. If not, request will move forward to account `B` checking for amount if yes chain will be broken otherwise the request will keep forwarding till it finds the suitable handler. Here `A`, `B` and `C` are links of the chain and the whole phenomenon is Chain of Responsibility.
 
 In plain words
+
 > It helps building a chain of objects. Request enters from one end and keeps going from object to object till it finds the suitable handler.
 
 Wikipedia says
+
 > In object-oriented design, the chain-of-responsibility pattern is a design pattern consisting of a source of command objects and a series of processing objects. Each processing object contains logic that defines the types of command objects that it can handle; the rest are passed to the next processing object in the chain.
 
 **Programmatic Example**
 
 Translating our account example above. First of all we have a base account having the logic for chaining the accounts together and some accounts
 
-```php
-abstract class Account
-{
-    protected $successor;
-    protected $balance;
+```java
+// Chain of Responsibility
+interface Handler {
+    void setNext(Handler handler);
+    void handle(String request);
+}
 
-    public function setNext(Account $account)
-    {
-        $this->successor = $account;
+class MonkeyHandler implements Handler {
+    private Handler next;
+    public void setNext(Handler handler) {
+        this.next = handler;
     }
-
-    public function pay(float $amountToPay)
-    {
-        if ($this->canPay($amountToPay)) {
-            echo sprintf('Paid %s using %s' . PHP_EOL, $amountToPay, get_called_class());
-        } elseif ($this->successor) {
-            echo sprintf('Cannot pay using %s. Proceeding ..' . PHP_EOL, get_called_class());
-            $this->successor->pay($amountToPay);
+    public void handle(String request) {
+        if (request.equals("Banana")) {
+            System.out.println("Monkey: I'll eat the Banana.");
+        } else if (next != null) {
+            next.handle(request);
         } else {
-            throw new Exception('None of the accounts have enough balance');
+            System.out.println(request + " was left untouched.");
         }
     }
+}
 
-    public function canPay($amount): bool
-    {
-        return $this->balance >= $amount;
+class SquirrelHandler implements Handler {
+    private Handler next;
+    public void setNext(Handler handler) {
+        this.next = handler;
+    }
+    public void handle(String request) {
+        if (request.equals("Nut")) {
+            System.out.println("Squirrel: I'll eat the Nut.");
+        } else if (next != null) {
+            next.handle(request);
+        } else {
+            System.out.println(request + " was left untouched.");
+        }
     }
 }
 
-class Bank extends Account
-{
-    protected $balance;
-
-    public function __construct(float $balance)
-    {
-        $this->balance = $balance;
+class DogHandler implements Handler {
+    private Handler next;
+    public void setNext(Handler handler) {
+        this.next = handler;
+    }
+    public void handle(String request) {
+        if (request.equals("MeatBall")) {
+            System.out.println("Dog: I'll eat the MeatBall.");
+        } else if (next != null) {
+            next.handle(request);
+        } else {
+            System.out.println(request + " was left untouched.");
+        }
     }
 }
 
-class Paypal extends Account
-{
-    protected $balance;
+// Usage
+MonkeyHandler monkey = new MonkeyHandler();
+SquirrelHandler squirrel = new SquirrelHandler();
+DogHandler dog = new DogHandler();
+monkey.setNext(squirrel);
+squirrel.setNext(dog);
 
-    public function __construct(float $balance)
-    {
-        $this->balance = $balance;
-    }
-}
-
-class Bitcoin extends Account
-{
-    protected $balance;
-
-    public function __construct(float $balance)
-    {
-        $this->balance = $balance;
-    }
+for (String food : new String[]{"Nut", "Banana", "MeatBall", "Cup of coffee"}) {
+    monkey.handle(food);
 }
 ```
 
-Now let's prepare the chain using the links defined above (i.e. Bank, Paypal, Bitcoin)
+**When to use?**
 
-```php
-// Let's prepare a chain like below
-//      $bank->$paypal->$bitcoin
-//
-// First priority bank
-//      If bank can't pay then paypal
-//      If paypal can't pay then bit coin
+When you have a set of processing objects and you want to pass a request through this chain to process it. Or in other words, when the handler for a request isn't known a priori and you want to decouple the sender and receiver of the request.
 
-$bank = new Bank(100);          // Bank with balance 100
-$paypal = new Paypal(200);      // Paypal with balance 200
-$bitcoin = new Bitcoin(300);    // Bitcoin with balance 300
-
-$bank->setNext($paypal);
-$paypal->setNext($bitcoin);
-
-// Let's try to pay using the first priority i.e. bank
-$bank->pay(259);
-
-// Output will be
-// ==============
-// Cannot pay using bank. Proceeding ..
-// Cannot pay using paypal. Proceeding ..:
-// Paid 259 using Bitcoin!
-```
-
-👮 Command
--------
+## 👮 Command
 
 Real world example
+
 > A generic example would be you ordering food at a restaurant. You (i.e. `Client`) ask the waiter (i.e. `Invoker`) to bring some food (i.e. `Command`) and waiter simply forwards the request to Chef (i.e. `Receiver`) who has the knowledge of what and how to cook.
 > Another example would be you (i.e. `Client`) switching on (i.e. `Command`) the television (i.e. `Receiver`) using a remote control (`Invoker`).
 
 In plain words
+
 > Allows you to encapsulate actions in objects. The key idea behind this pattern is to provide the means to decouple client from receiver.
 
 Wikipedia says
+
 > In object-oriented programming, the command pattern is a behavioral design pattern in which an object is used to encapsulate all information needed to perform an action or trigger an event at a later time. This information includes the method name, the object that owns the method and values for the method parameters.
 
 **Programmatic Example**
 
 First of all we have the receiver that has the implementation of every action that could be performed
-```php
+
+```java
 // Receiver
 class Bulb
 {
@@ -1439,108 +1482,83 @@ class Bulb
     }
 }
 ```
+
 then we have an interface that each of the commands are going to implement and then we have a set of commands
-```php
+
+```java
 interface Command
 {
     public function execute();
-    public function undo();
-    public function redo();
 }
 
-// Command
-class TurnOn implements Command
+class TurnOnCommand implements Command
 {
-    protected $bulb;
-
-    public function __construct(Bulb $bulb)
-    {
-        $this->bulb = $bulb;
+    private Light light;
+    public TurnOnCommand(Light light) {
+        this.light = light;
     }
-
-    public function execute()
-    {
-        $this->bulb->turnOn();
-    }
-
-    public function undo()
-    {
-        $this->bulb->turnOff();
-    }
-
-    public function redo()
-    {
-        $this->execute();
+    public void execute() {
+        light.turnOn();
     }
 }
 
-class TurnOff implements Command
+class TurnOffCommand implements Command
 {
-    protected $bulb;
-
-    public function __construct(Bulb $bulb)
-    {
-        $this->bulb = $bulb;
+    private Light light;
+    public TurnOffCommand(Light light) {
+        this.light = light;
     }
-
-    public function execute()
-    {
-        $this->bulb->turnOff();
-    }
-
-    public function undo()
-    {
-        $this->bulb->turnOn();
-    }
-
-    public function redo()
-    {
-        $this->execute();
+    public void execute() {
+        light.turnOff();
     }
 }
 ```
+
 Then we have an `Invoker` with whom the client will interact to process any commands
-```php
-// Invoker
-class RemoteControl
-{
-    public function submit(Command $command)
-    {
-        $command->execute();
+
+```java
+class RemoteControl {
+    private Command command;
+    public void setCommand(Command command) {
+        this.command = command;
+    }
+    public void pressButton() {
+        command.execute();
     }
 }
-```
-Finally let's see how we can use it in our client
-```php
-$bulb = new Bulb();
 
-$turnOn = new TurnOn($bulb);
-$turnOff = new TurnOff($bulb);
-
-$remote = new RemoteControl();
-$remote->submit($turnOn); // Bulb has been lit!
-$remote->submit($turnOff); // Darkness!
+// Usage
+Light light = new Light();
+RemoteControl remote = new RemoteControl();
+remote.setCommand(new TurnOnCommand(light));
+remote.pressButton(); // Light is on
+remote.setCommand(new TurnOffCommand(light));
+remote.pressButton(); // Light is off
 ```
 
-Command pattern can also be used to implement a transaction based system. Where you keep maintaining the history of commands as soon as you execute them. If the final command is successfully executed, all good otherwise just iterate through the history and keep executing the `undo` on all the executed commands.
+**When to use?**
 
-➿ Iterator
---------
+When you want to parameterize objects with operations. Or in other words, when you want to queue operations, schedule their execution or log their execution.
+
+## 🔁 Iterator
 
 Real world example
-> An old radio set will be a good example of iterator, where user could start at some channel and then use next or previous buttons to go through the respective channels. Or take an example of MP3 player or a TV set where you could press the next and previous buttons to go through the consecutive channels or in other words they all provide an interface to iterate through the respective channels, songs or radio stations.  
+
+> An old radio set will be a good example of iterator, where user could start at some channel and then use next or previous buttons to go through the respective channels. Or take an example of MP3 player or a TV set where you could press the next and previous buttons to go through the consecutive channels or in other words they all provide an interface to iterate through the respective channels, songs or radio stations.
 
 In plain words
+
 > It presents a way to access the elements of an object without exposing the underlying presentation.
 
 Wikipedia says
+
 > In object-oriented programming, the iterator pattern is a design pattern in which an iterator is used to traverse a container and access the container's elements. The iterator pattern decouples algorithms from containers; in some cases, algorithms are necessarily container-specific and thus cannot be decoupled.
 
 **Programmatic example**
 
-In PHP it is quite easy to implement using SPL (Standard PHP Library). Translating our radio stations example from above. First of all we have `RadioStation`
+In java it is quite easy to implement using SPL (Standard java Library). Translating our radio stations example from above. First of all we have `RadioStation`
 
-```php
+```java
 class RadioStation
 {
     protected $frequency;
@@ -1556,9 +1574,10 @@ class RadioStation
     }
 }
 ```
+
 Then we have our iterator
 
-```php
+```java
 use Countable;
 use Iterator;
 
@@ -1614,8 +1633,10 @@ class StationList implements Countable, Iterator
     }
 }
 ```
+
 And then it can be used as
-```php
+
+```java
 $stationList = new StationList();
 
 $stationList->addStation(new RadioStation(89));
@@ -1624,22 +1645,28 @@ $stationList->addStation(new RadioStation(102));
 $stationList->addStation(new RadioStation(103.2));
 
 foreach($stationList as $station) {
-    echo $station->getFrequency() . PHP_EOL;
+    echo $station->getFrequency() . java_EOL;
 }
 
 $stationList->removeStation(new RadioStation(89)); // Will remove station 89
 ```
 
-👽 Mediator
-========
+**When to use?**
+
+When you want to provide a standard way to access the elements of an aggregate object without exposing its underlying representation.
+
+# 👽 Mediator
 
 Real world example
+
 > A general example would be when you talk to someone on your mobile phone, there is a network provider sitting between you and them and your conversation goes through it instead of being directly sent. In this case network provider is mediator.
 
 In plain words
+
 > Mediator pattern adds a third party object (called mediator) to control the interaction between two objects (called colleagues). It helps reduce the coupling between the classes communicating with each other. Because now they don't need to have the knowledge of each other's implementation.
 
 Wikipedia says
+
 > In software engineering, the mediator pattern defines an object that encapsulates how a set of objects interact. This pattern is considered to be a behavioral pattern due to the way it can alter the program's running behavior.
 
 **Programmatic Example**
@@ -1648,8 +1675,8 @@ Here is the simplest example of a chat room (i.e. mediator) with users (i.e. col
 
 First of all, we have the mediator i.e. the chat room
 
-```php
-interface ChatRoomMediator 
+```java
+interface ChatRoomMediator
 {
     public function showMessage(User $user, string $message);
 }
@@ -1668,7 +1695,8 @@ class ChatRoom implements ChatRoomMediator
 ```
 
 Then we have our users i.e. colleagues
-```php
+
+```java
 class User {
     protected $name;
     protected $chatMediator;
@@ -1687,8 +1715,10 @@ class User {
     }
 }
 ```
+
 And the usage
-```php
+
+```java
 $mediator = new ChatRoom();
 
 $john = new User('John Doe', $mediator);
@@ -1702,15 +1732,22 @@ $jane->send('Hey!');
 // Feb 14, 10:58 [Jane]: Hey!
 ```
 
-💾 Memento
--------
+**When to use?**
+
+When you want to reduce the coupling between the objects that communicate with each other. Or in other words, when you want to have a centralized communication medium between different components in a system.
+
+## 💾 Memento
+
 Real world example
+
 > Take the example of calculator (i.e. originator), where whenever you perform some calculation the last calculation is saved in memory (i.e. memento) so that you can get back to it and maybe get it restored using some action buttons (i.e. caretaker).
 
 In plain words
+
 > Memento pattern is about capturing and storing the current state of an object in a manner that it can be restored later on in a smooth manner.
 
 Wikipedia says
+
 > The memento pattern is a software design pattern that provides the ability to restore an object to its previous state (undo via rollback).
 
 Usually useful when you need to provide some sort of undo functionality.
@@ -1721,7 +1758,7 @@ Lets take an example of text editor which keeps saving the state from time to ti
 
 First of all we have our memento object that will be able to hold the editor state
 
-```php
+```java
 class EditorMemento
 {
     protected $content;
@@ -1740,7 +1777,7 @@ class EditorMemento
 
 Then we have our editor i.e. originator that is going to use memento object
 
-```php
+```java
 class Editor
 {
     protected $content = '';
@@ -1769,7 +1806,7 @@ class Editor
 
 And then it can be used as
 
-```php
+```java
 $editor = new Editor();
 
 // Type some stuff
@@ -1791,21 +1828,29 @@ $editor->restore($saved);
 $editor->getContent(); // This is the first sentence. This is second.
 ```
 
-😎 Observer
---------
+**When to use?**
+
+When you need to be able to restore an object to a previous state or when you need to be able to rollback changes made to an object.
+
+## 😎 Observer
+
 Real world example
-> A good example would be the job seekers where they subscribe to some job posting site and they are notified whenever there is a matching job opportunity.   
+
+> A good example would be the job seekers where they subscribe to some job posting site and they are notified whenever there is a matching job opportunity.
 
 In plain words
+
 > Defines a dependency between objects so that whenever an object changes its state, all its dependents are notified.
 
 Wikipedia says
+
 > The observer pattern is a software design pattern in which an object, called the subject, maintains a list of its dependents, called observers, and notifies them automatically of any state changes, usually by calling one of their methods.
 
 **Programmatic example**
 
 Translating our example from above. First of all we have job seekers that need to be notified for a job posting
-```php
+
+```java
 class JobPost
 {
     protected $title;
@@ -1837,8 +1882,10 @@ class JobSeeker implements Observer
     }
 }
 ```
+
 Then we have our job postings to which the job seekers will subscribe
-```php
+
+```java
 class EmploymentAgency implements Observable
 {
     protected $observers = [];
@@ -1861,8 +1908,10 @@ class EmploymentAgency implements Observable
     }
 }
 ```
+
 Then it can be used as
-```php
+
+```java
 // Create subscribers
 $johnDoe = new JobSeeker('John Doe');
 $janeDoe = new JobSeeker('Jane Doe');
@@ -1880,162 +1929,121 @@ $jobPostings->addJob(new JobPost('Software Engineer'));
 // Hi Jane Doe! New job posted: Software Engineer
 ```
 
-🏃 Visitor
--------
+**When to use?**
+
+When you want to notify a set of objects about changes in the state of another object. Or in other words, when an object (subject) changes state and you want to notify all its dependents (observers) about it.
+
+## 🏃 Visitor
+
 Real world example
+
 > Consider someone visiting Dubai. They just need a way (i.e. visa) to enter Dubai. After arrival, they can come and visit any place in Dubai on their own without having to ask for permission or to do some leg work in order to visit any place here; just let them know of a place and they can visit it. Visitor pattern lets you do just that, it helps you add places to visit so that they can visit as much as they can without having to do any legwork.
 
 In plain words
+
 > Visitor pattern lets you add further operations to objects without having to modify them.
 
 Wikipedia says
+
 > In object-oriented programming and software engineering, the visitor design pattern is a way of separating an algorithm from an object structure on which it operates. A practical result of this separation is the ability to add new operations to existing object structures without modifying those structures. It is one way to follow the open/closed principle.
 
 **Programmatic example**
 
 Let's take an example of a zoo simulation where we have several different kinds of animals and we have to make them Sound. Let's translate this using visitor pattern
 
-```php
+```java
 // Visitee
 interface Animal
 {
-    public function accept(AnimalOperation $operation);
+    public function accept(AnimalVisitor $visitor);
 }
 
-// Visitor
-interface AnimalOperation
-{
-    public function visitMonkey(Monkey $monkey);
-    public function visitLion(Lion $lion);
-    public function visitDolphin(Dolphin $dolphin);
-}
-```
-Then we have our implementations for the animals
-```php
 class Monkey implements Animal
 {
-    public function shout()
+    public function accept(AnimalVisitor $visitor)
     {
-        echo 'Ooh oo aa aa!';
-    }
-
-    public function accept(AnimalOperation $operation)
-    {
-        $operation->visitMonkey($this);
+        $visitor->visit($this);
     }
 }
 
 class Lion implements Animal
 {
-    public function roar()
+    public function accept(AnimalVisitor $visitor)
     {
-        echo 'Roaaar!';
-    }
-
-    public function accept(AnimalOperation $operation)
-    {
-        $operation->visitLion($this);
+        $visitor->visit($this);
     }
 }
 
-class Dolphin implements Animal
-{
-    public function speak()
-    {
-        echo 'Tuut tuttu tuutt!';
-    }
+interface AnimalVisitor {
+    public function visit(Monkey monkey);
+    public void visit(Lion lion);
+}
 
-    public function accept(AnimalOperation $operation)
-    {
-        $operation->visitDolphin($this);
+class SpeakVisitor implements AnimalVisitor {
+    public void visit(Monkey monkey) {
+        System.out.println("Monkey says: Ooh oo aa aa!");
+    }
+    public void visit(Lion lion) {
+        System.out.println("Lion says: Roar!");
     }
 }
-```
-Let's implement our visitor
-```php
-class Speak implements AnimalOperation
-{
-    public function visitMonkey(Monkey $monkey)
-    {
-        $monkey->shout();
-    }
 
-    public function visitLion(Lion $lion)
-    {
-        $lion->roar();
-    }
-
-    public function visitDolphin(Dolphin $dolphin)
-    {
-        $dolphin->speak();
-    }
-}
+// Usage
+Animal monkey = new Monkey();
+Animal lion = new Lion();
+AnimalVisitor speak = new SpeakVisitor();
+monkey.accept(speak);
+lion.accept(speak);
 ```
 
-And then it can be used as
-```php
-$monkey = new Monkey();
-$lion = new Lion();
-$dolphin = new Dolphin();
-
-$speak = new Speak();
-
-$monkey->accept($speak);    // Ooh oo aa aa!    
-$lion->accept($speak);      // Roaaar!
-$dolphin->accept($speak);   // Tuut tutt tuutt!
-```
 We could have done this simply by having an inheritance hierarchy for the animals but then we would have to modify the animals whenever we would have to add new actions to animals. But now we will not have to change them. For example, let's say we are asked to add the jump behavior to the animals, we can simply add that by creating a new visitor i.e.
 
-```php
+```java
 class Jump implements AnimalOperation
 {
-    public function visitMonkey(Monkey $monkey)
+    public void visit(Monkey monkey)
     {
-        echo 'Jumped 20 feet high! on to the tree!';
+        System.out.println("Jumped 20 feet high! on to the tree!");
     }
 
-    public function visitLion(Lion $lion)
+    public void visit(Lion lion)
     {
-        echo 'Jumped 7 feet! Back on the ground!';
-    }
-
-    public function visitDolphin(Dolphin $dolphin)
-    {
-        echo 'Walked on water a little and disappeared';
+        System.out.println("Jumped 7 feet! Back on the ground!");
     }
 }
 ```
+
 And for the usage
-```php
+
+```java
 $jump = new Jump();
 
 $monkey->accept($speak);   // Ooh oo aa aa!
 $monkey->accept($jump);    // Jumped 20 feet high! on to the tree!
 
 $lion->accept($speak);     // Roaaar!
-$lion->accept($jump);      // Jumped 7 feet! Back on the ground!
-
-$dolphin->accept($speak);  // Tuut tutt tuutt!
-$dolphin->accept($jump);   // Walked on water a little and disappeared
+$lion->accept($jump);      // Jumped 7 feet! Back on the ground!;
 ```
 
-💡 Strategy
---------
+## 💡 Strategy
 
 Real world example
+
 > Consider the example of sorting, we implemented bubble sort but the data started to grow and bubble sort started getting very slow. In order to tackle this we implemented Quick sort. But now although the quick sort algorithm was doing better for large datasets, it was very slow for smaller datasets. In order to handle this we implemented a strategy where for small datasets, bubble sort will be used and for larger, quick sort.
 
 In plain words
+
 > Strategy pattern allows you to switch the algorithm or strategy based upon the situation.
 
 Wikipedia says
+
 > In computer programming, the strategy pattern (also known as the policy pattern) is a behavioural software design pattern that enables an algorithm's behavior to be selected at runtime.
 
 **Programmatic example**
 
 Translating our example from above. First of all we have our strategy interface and different strategy implementations
 
-```php
+```java
 interface SortStrategy
 {
     public function sort(array $dataset): array;
@@ -2065,7 +2073,8 @@ class QuickSortStrategy implements SortStrategy
 ```
 
 And then we have our client that is going to use any strategy
-```php
+
+```java
 class Sorter
 {
     protected $sorterSmall;
@@ -2087,8 +2096,10 @@ class Sorter
     }
 }
 ```
+
 And it can be used as
-```php
+
+```java
 $smalldataset = [1, 3, 4, 2];
 $bigdataset = [1, 4, 3, 2, 8, 10, 5, 6, 9, 7];
 
@@ -2099,15 +2110,22 @@ $sorter->sort($dataset); // Output : Sorting using bubble sort
 $sorter->sort($bigdataset); // Output : Sorting using quick sort
 ```
 
-💢 State
------
+**When to use?**
+
+When you want to be able to switch between different algorithms or strategies based on the situation or context.
+
+## 💢 State
+
 Real world example
-> Imagine you are using some drawing application, you choose the paint brush to draw. Now the brush changes its behavior based on the selected color i.e. if you have chosen red color it will draw in red, if blue then it will be in blue etc.  
+
+> Imagine you are using some drawing application, you choose the paint brush to draw. Now the brush changes its behavior based on the selected color i.e. if you have chosen red color it will draw in red, if blue then it will be in blue etc.
 
 In plain words
+
 > It lets you change the behavior of a class when the state changes.
 
 Wikipedia says
+
 > The state pattern is a behavioral software design pattern that implements a state machine in an object-oriented way. With the state pattern, a state machine is implemented by implementing each individual state as a derived class of the state pattern interface, and implementing state transitions by invoking methods defined by the pattern's superclass.
 > The state pattern can be interpreted as a strategy pattern which is able to switch the current strategy through invocations of methods defined in the pattern's interface.
 
@@ -2115,86 +2133,52 @@ Wikipedia says
 
 Let's take an example of a phone. First of all we have our state interface and some state implementations
 
-```php
-interface PhoneState {
-    public function pickUp(): PhoneState;
-    public function hangUp(): PhoneState;
-    public function dial(): PhoneState;
+```java
+interface State {
+    void handle(ContextState context);
 }
 
-// states implementation
-class PhoneStateIdle implements PhoneState {
-    public function pickUp(): PhoneState {
-        return new PhoneStatePickedUp();
+class ContextState {
+    private State state;
+    public void setState(State state) {
+        this.state = state;
     }
-    public function hangUp(): PhoneState {
-        throw new Exception("already idle");
-    }
-    public function dial(): PhoneState {
-        throw new Exception("unable to dial in idle state");
+    public void request() {
+        state.handle(this);
     }
 }
 
-class PhoneStatePickedUp implements PhoneState {
-    public function pickUp(): PhoneState {
-        throw new Exception("already picked up");
-    }
-    public function hangUp(): PhoneState {
-        return new PhoneStateIdle();
-    }
-    public function dial(): PhoneState {
-        return new PhoneStateCalling();
+class ConcreteStateA implements State {
+    public void handle(ContextState context) {
+        System.out.println("State A");
+        context.setState(new ConcreteStateB());
     }
 }
 
-class PhoneStateCalling implements PhoneState {
-    public function pickUp(): PhoneState {
-        throw new Exception("already picked up");
-    }
-    public function hangUp(): PhoneState {
-        return new PhoneStateIdle();
-    }
-    public function dial(): PhoneState {
-        throw new Exception("already dialing");
+class ConcreteStateB implements State {
+    public void handle(ContextState context) {
+        System.out.println("State B");
+        context.setState(new ConcreteStateA());
     }
 }
+
+// Usage
+ContextState context = new ContextState();
+context.setState(new ConcreteStateA());
+context.request(); // State A
+context.request(); // State B
 ```
 
-Then we have our Phone class that changes the state on different behavior calls
+**When to use?**
 
-```php
-class Phone {
-    private $state;
+When an object should change its behavior when its internal state changes. Or in other words, when the object appears to change its class at runtime.
 
-    public function __construct() {
-        $this->state = new PhoneStateIdle();
-    }
-    public function pickUp() {
-        $this->state = $this->state->pickUp();
-    }
-    public function hangUp() {
-        $this->state = $this->state->hangUp();
-    }
-    public function dial() {
-        $this->state = $this->state->dial();
-    }
-}
-```
-
-And then it can be used as follows and it will call the relevant state methods:
-
-```php
-$phone = new Phone();
-
-$phone->pickUp();
-$phone->dial();
-```
-
-📒 Template Method
----------------
+## 📒 Template Method
 
 Real world example
+
 > Suppose we are getting some house built. The steps for building might look like
+>
 > - Prepare the base of house
 > - Build the walls
 > - Add roof
@@ -2203,9 +2187,11 @@ Real world example
 > The order of these steps could never be changed i.e. you can't build the roof before building the walls etc but each of the steps could be modified for example walls can be made of wood or polyester or stone.
 
 In plain words
+
 > Template method defines the skeleton of how a certain algorithm could be performed, but defers the implementation of those steps to the children classes.
 
 Wikipedia says
+
 > In software engineering, the template method pattern is a behavioral design pattern that defines the program skeleton of an algorithm in an operation, deferring some steps to subclasses. It lets one redefine certain steps of an algorithm without changing the algorithm's structure.
 
 **Programmatic Example**
@@ -2213,7 +2199,8 @@ Wikipedia says
 Imagine we have a build tool that helps us test, lint, build, generate build reports (i.e. code coverage reports, linting report etc) and deploy our app on the test server.
 
 First of all we have our base class that specifies the skeleton for the build algorithm
-```php
+
+```java
 abstract class Builder
 {
 
@@ -2235,7 +2222,7 @@ abstract class Builder
 
 Then we can have our implementations
 
-```php
+```java
 class AndroidBuilder extends Builder
 {
     public function test()
@@ -2282,9 +2269,10 @@ class IosBuilder extends Builder
     }
 }
 ```
+
 And then it can be used as
 
-```php
+```java
 $androidBuilder = new AndroidBuilder();
 $androidBuilder->build();
 
